@@ -9,6 +9,7 @@ export default function BookingForm() {
     guests: "",
     message: "",
   });
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -16,87 +17,145 @@ export default function BookingForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/bookings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    if (res.ok) {
-      alert("Booking submitted!");
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        date: "",
-        guests: "",
-        message: "",
+
+    try {
+      const res = await fetch("http://localhost:5000/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
       });
-    } else {
+
+      if (res.ok) {
+        setShowSuccess(true);
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          date: "",
+          guests: "",
+          message: "",
+        });
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 5000);
+      } else {
+        alert("Failed to book. Please try again.");
+      }
+    } catch (error) {
+      console.error("Booking error:", error);
       alert("Failed to book. Please try again.");
     }
   };
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-center">
-        Book Your Experience
-      </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-          className="w-full border p-2"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-          className="w-full border p-2"
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone"
-          value={form.phone}
-          onChange={handleChange}
-          required
-          className="w-full border p-2"
-        />
-        <input
-          type="date"
-          name="date"
-          value={form.date}
-          onChange={handleChange}
-          required
-          className="w-full border p-2"
-        />
-        <input
-          type="number"
-          name="guests"
-          placeholder="No. of Guests"
-          value={form.guests}
-          onChange={handleChange}
-          required
-          className="w-full border p-2"
-        />
-        <textarea
-          name="message"
-          placeholder="Additional Notes"
-          value={form.message}
-          onChange={handleChange}
-          className="w-full border p-2"
-        />
-        <button type="submit" className="bg-black text-white px-4 py-2 rounded">
-          Submit Booking
-        </button>
-      </form>
-    </div>
+    <section className="contact py-16 page-section">
+      <div className="container">
+        <div className="section-header">
+          <h2>Book Your Experience</h2>
+          <p>
+            Reserve your table or event space at Enlightens for an unforgettable
+            dining experience
+          </p>
+        </div>
+
+        {showSuccess && (
+          <div className="form-success">
+            <p>
+              ✓ Thank you! Your booking has been submitted successfully. We'll
+              contact you soon to confirm.
+            </p>
+          </div>
+        )}
+
+        <div
+          className="contact-form"
+          style={{ maxWidth: "600px", margin: "0 auto" }}
+        >
+          <form onSubmit={handleSubmit}>
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">Your Name *</label>
+                <input
+                  type="text"
+                  name="name"
+                  className="form-control"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Phone Number *</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  className="form-control"
+                  value={form.phone}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Email Address *</label>
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">Preferred Date</label>
+                <input
+                  type="date"
+                  name="date"
+                  className="form-control"
+                  value={form.date}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Number of Guests</label>
+                <input
+                  type="number"
+                  name="guests"
+                  className="form-control"
+                  value={form.guests}
+                  onChange={handleChange}
+                  min="1"
+                  max="200"
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">
+                Special Requirements or Notes
+              </label>
+              <textarea
+                name="message"
+                className="form-control"
+                value={form.message}
+                onChange={handleChange}
+                rows="4"
+                placeholder="Any special requests, dietary restrictions, or event details..."
+              />
+            </div>
+
+            <button type="submit" className="btn btn--primary btn--full-width">
+              Submit Booking Request
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 }

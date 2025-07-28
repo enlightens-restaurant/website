@@ -8,6 +8,7 @@ import BookingForm from "./components/BookingForm";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 import "./index.css";
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }
