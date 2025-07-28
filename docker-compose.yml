@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: enlightens-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: enlightens
+
+  server:
+    build: ./server
+    container_name: enlightens-server
+    ports:
+      - "5002:5002"
+    environment:
+      - PORT=5002
+      - MONGO_URI=mongodb://mongo:27017/enlightens
+      - ADMIN_EMAIL=admin@enlightens.com
+      - ADMIN_PASSWORD=supersecure
+    depends_on:
+      - mongo
+    volumes:
+      - ./server:/app
+    working_dir: /app
+    command: node index.js
+
+  client:
+    build: ./client
+    container_name: enlightens-client
+    ports:
+      - "5173:80"
+    environment:
+      - VITE_API_URL=http://localhost:5002
+    working_dir: /app
+    volumes:
+      - ./client:/app
+    depends_on:
+      - server
+
+volumes:
+  mongo_data:
