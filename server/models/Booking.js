@@ -8,6 +8,7 @@ const bookingSchema = new mongoose.Schema(
     date: String,
     guests: Number,
     message: String,
+    inquiryType: String,
   },
   { timestamps: true }
 );

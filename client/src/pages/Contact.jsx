@@ -19,7 +19,7 @@ export function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
@@ -28,22 +28,37 @@ export function Contact() {
       return;
     }
 
-    // Show success message
-    setShowSuccess(true);
-
-    // Reset form after 5 seconds
-    setTimeout(() => {
-      setShowSuccess(false);
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        inquiryType: "dinner",
-        date: "",
-        guests: "",
-        message: "",
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-    }, 5000);
+
+      if (res.ok) {
+        // Show success message
+        setShowSuccess(true);
+
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+          setFormData({
+            name: "",
+            phone: "",
+            email: "",
+            inquiryType: "dinner",
+            date: "",
+            guests: "",
+            message: "",
+          });
+        }, 5000);
+      } else {
+        alert("Failed to submit inquiry. Please try again.");
+      }
+    } catch (error) {
+      console.error("Contact form error:", error);
+      alert("Failed to submit inquiry. Please try again.");
+    }
   };
 
   const contactInfo = [

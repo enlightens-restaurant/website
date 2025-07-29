@@ -7,7 +7,7 @@ export function AdminLogin() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const res = await fetch("http://localhost:5000/api/admin/login", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -15,25 +15,46 @@ export function AdminLogin() {
     if (res.ok) navigate("/admin/dashboard");
     else alert("Login failed");
   };
+
   return (
-    <div className="p-10 max-w-md mx-auto">
-      <h2 className="text-2xl mb-4">Admin Login</h2>
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="border w-full p-2 mb-3"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="border w-full p-2 mb-3"
-      />
-      <button onClick={handleLogin} className="bg-black text-white px-4 py-2">
-        Login
-      </button>
-    </div>
+    <section className="contact py-16 page-section">
+      <div className="container">
+        <div className="section-header">
+          <h2>Admin Login</h2>
+          <p>Sign in to access the admin dashboard</p>
+        </div>
+        <div
+          className="contact-form"
+          style={{ maxWidth: "400px", margin: "0 auto" }}
+        >
+          <div className="form-group">
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              placeholder="admin@enlightens.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={handleLogin}
+            className="btn btn--primary btn--full-width"
+          >
+            Login to Dashboard
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }
