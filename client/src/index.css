@@ -776,7 +776,13 @@ select.form-control {
   justify-content: space-between;
   padding: var(--space-16) var(--space-20);
 }
-
+.nav-brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-8);
+  justify-content: flex-start;
+}
 .nav-brand h2 {
   color: var(--color-gold);
   margin: 0;
@@ -791,6 +797,10 @@ select.form-control {
   display: block;
   margin-top: -4px;
   opacity: 0.8;
+}
+.nav-logo {
+  width: 3rem;
+  height: 3rem;
 }
 
 .nav-menu {
