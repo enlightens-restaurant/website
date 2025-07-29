@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Menu } from "./pages/Menu";
 import { Ambiance } from "./pages/Ambiance";
@@ -14,7 +14,7 @@ import "./index.css";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter basename="/website">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -29,7 +29,7 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
       <Footer />
-    </Router>
+    </BrowserRouter>
   );
 }
 
