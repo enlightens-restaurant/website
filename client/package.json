@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.7",
   "type": "module",
   "homepage": "https://shanu516516.github.io/website",
   "scripts": {
