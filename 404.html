@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/website/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enlightens Restaurant</title>
+    <script>
+        // Single Page Apps for GitHub Pages
+        // https://github.com/rafgraph/spa-github-pages
+        // This script checks to see if a redirect is necessary
+        // and redirects to the correct url using sessionStorage
+
+        // Get the current path and check if it's a sub-path
+        var l = window.location;
+        var pathSegmentsToKeep = 1; // For '/website/' base path
+
+        if (l.pathname.split('/').length > pathSegmentsToKeep + 1) {
+            var redirect = l.pathname.slice(l.pathname.indexOf('/', 1) + 1);
+            if (redirect) {
+                redirect = redirect + (l.search ? l.search : '');
+                sessionStorage.setItem('redirect', redirect);
+            }
+        }
+
+        // Redirect to the base path
+        l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/website/');
+    </script>
+</head>
+
+<body>
+    <div>Redirecting...</div>
+</body>
+
+</html>
