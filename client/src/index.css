@@ -985,6 +985,7 @@ select.form-control {
   font-size: var(--font-size-4xl);
   color: var(--color-text);
   margin-bottom: var(--space-16);
+  display: inline-block;
   position: relative;
 }
 
@@ -994,7 +995,8 @@ select.form-control {
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
+  width: 120%;
+  min-width: 60px;
   height: 3px;
   background: var(--color-gold);
 }
