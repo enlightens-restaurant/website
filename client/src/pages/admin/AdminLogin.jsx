@@ -32,7 +32,7 @@ export function AdminLogin() {
             <input
               type="email"
               className="form-control"
-              placeholder="admin@enlightens.com"
+              placeholder="admin@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

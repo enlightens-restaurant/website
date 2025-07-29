@@ -7,15 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enlightens Restaurant</title>
   <script>
-    // Single Page Apps for GitHub Pages
-    // Check for redirect from 404.html
-    (function (l) {
-      var redirect = sessionStorage.getItem('redirect');
-      if (redirect) {
-        sessionStorage.removeItem('redirect');
-        l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/website/' + redirect);
-      }
-    }(window.location))
+    (function () {
+      var base = '/website';
+      var params = new URLSearchParams(window.location.search);
+      var encoded = params.get('p');
+      if (!encoded) return;
+
+      // Decode the original target path
+      var target = decodeURIComponent(encoded);
+      // Ensure leading slash
+      if (target[0] !== '/') target = '/' + target;
+      // Build absolute URL with base path
+      var newUrl = base + target;
+      // Remove ?p param and update the URL without reloading
+      window.history.replaceState({}, '', newUrl);
+    })();
   </script>
 </head>
 
