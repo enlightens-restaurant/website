@@ -3,34 +3,31 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/website/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Enlightens Restaurant</title>
     <script>
-        // Single Page Apps for GitHub Pages
-        // https://github.com/rafgraph/spa-github-pages
-        // This script checks to see if a redirect is necessary
-        // and redirects to the correct url using sessionStorage
+        /*
+          GitHub Pages single-page-app redirect
+          (c) 2016–2024 Rafael Pedicini - Licensed GPLv3
+          https://github.com/rafgraph/spa-github-pages
+        */
+        (function () {
+            var l = window.location;
+            var base = '/website/';
+            // Only run if the current path is not already under base
+            if (!l.pathname.startsWith(base)) return;
 
-        // Get the current path and check if it's a sub-path
-        var l = window.location;
-        var pathSegmentsToKeep = 1; // For '/website/' base path
-
-        if (l.pathname.split('/').length > pathSegmentsToKeep + 1) {
-            var redirect = l.pathname.slice(l.pathname.indexOf('/', 1) + 1);
-            if (redirect) {
-                redirect = redirect + (l.search ? l.search : '');
-                sessionStorage.setItem('redirect', redirect);
-            }
-        }
-
-        // Redirect to the base path
-        l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/website/');
+            // Strip the base from the pathname and construct new redirect URL
+            var path = l.pathname.slice(base.length);
+            // Construct redirect in the format /website/?/your/deep/link
+            var newUrl = base + '?/' + path + (l.search || '') + (l.hash || '');
+            l.replace(newUrl);
+        })();
     </script>
 </head>
 
 <body>
-    <div>Redirecting...</div>
+    <p>Redirecting...</p>
 </body>
 
 </html>
