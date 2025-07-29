@@ -858,13 +858,19 @@ select.form-control {
 
 /* Hero Section */
 .hero {
+  position: relative;
   height: 100vh;
-  /* background: var(--color-bg-1);
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.1'%3E%3Cpath d='M30 0c16.569 0 30 13.431 30 30s-13.431 30-30 30S0 46.569 0 30 13.431 0 30 0zm0 6c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24S43.255 6 30 6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); */
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  text-align: center;
+  padding: 6.5rem 1rem 5rem;
+  background: radial-gradient(
+      circle at 50% -10%,
+      rgba(25, 30, 39, 0.45),
+      rgba(5, 6, 9, 0.95) 70%
+    ),
+    url("./assets/bg_twilight.jpg") center/cover no-repeat;
   overflow: hidden;
 }
 
@@ -910,6 +916,44 @@ select.form-control {
   gap: var(--space-16);
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  /* background: linear-gradient(
+    45deg,
+    rgba(44, 95, 45, 0.85),
+    rgba(14, 48, 32, 0.7)
+  ); */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero .leaf-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero .leaf-layer span {
+  position: absolute;
+  width: 1.2rem;
+  height: 1.8rem;
+  transform-origin: 50% 90%;
+  animation: leafFloat linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes leafFloat {
+  from {
+    transform: translateY(-15vh) rotate(0deg) scale(1);
+  }
+  to {
+    transform: translateY(110vh) rotate(360deg) scale(1.3);
+  }
 }
 
 /* Section Styling */
@@ -1057,7 +1101,8 @@ select.form-control {
 
 /* Ambiance Section */
 .ambiance {
-  background: var(--color-bg-3);
+  /* background: var(--color-bg-3); */
+  background: var(--color-surface);
 }
 
 .ambiance-grid {
@@ -1197,7 +1242,8 @@ select.form-control {
 
 /* Events Section */
 .events {
-  background: var(--color-bg-4);
+  /* background: var(--color-bg-4); */
+  background: var(--color-surface);
 }
 
 .events-grid {
@@ -1282,7 +1328,8 @@ select.form-control {
 
 /* Contact Section */
 .contact {
-  background: var(--color-bg-5);
+  /* background: var(--color-bg-5); */
+  background: var(--color-surface);
 }
 
 .contact-grid {
@@ -1460,6 +1507,15 @@ select.form-control {
 .btn--outline:hover {
   background: var(--color-gold);
   color: var(--color-dark-brown);
+}
+
+/* Hero logo */
+.hero img.bodhi {
+  width: min(30rem, 65vw);
+  margin-bottom: 2.5rem;
+  filter: drop-shadow(0 0 14px rgba(255, 255, 200, 0.35))
+    drop-shadow(0 0 34px rgba(255, 255, 200, 0.18));
+  z-index: 2;
 }
 
 /* Responsive Design */
