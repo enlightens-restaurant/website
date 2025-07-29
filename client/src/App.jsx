@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import "./index.css";
+import "./logo-theme.css";
 
 function App() {
   return (
