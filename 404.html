@@ -6,22 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Enlightens Restaurant</title>
     <script>
-        /*
-          GitHub Pages single-page-app redirect
-          (c) 2016–2024 Rafael Pedicini - Licensed GPLv3
-          https://github.com/rafgraph/spa-github-pages
-        */
         (function () {
+            var base = '/website'; // MUST match vite.config.js base (without trailing slash)
             var l = window.location;
-            var base = '/website/';
-            // Only run if the current path is not already under base
-            if (!l.pathname.startsWith(base)) return;
+            // If the current path is exactly the base or already starts with base + '/?p=', do nothing
+            if (l.pathname === base + '/' || l.search.startsWith('?p=')) return;
 
-            // Strip the base from the pathname and construct new redirect URL
-            var path = l.pathname.slice(base.length);
-            // Construct redirect in the format /website/?/your/deep/link
-            var newUrl = base + '?/' + path + (l.search || '') + (l.hash || '');
-            l.replace(newUrl);
+            // Strip the base from the path (if it exists) so we don't double it up
+            var path = l.pathname.startsWith(base) ? l.pathname.slice(base.length) : l.pathname;
+            var query = l.search;
+            var hash = l.hash;
+
+            var target = path + query + hash;
+            // Encode and redirect using ?p=<encoded>
+            var redirectUrl = base + '/?p=' + encodeURIComponent(target);
+            l.replace(redirectUrl);
         })();
     </script>
 </head>
