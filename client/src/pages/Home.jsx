@@ -55,10 +55,10 @@ export function Home() {
             Premium Rooftop Restaurant • Banquet Hall • Event Destination
           </p>
           <div className="hero-buttons">
-            <Link to="/menu" className="btn btn--primary btn--lg">
+            <Link to="/menu" className="btn btn--ghost btn--lg">
               Explore Menu
             </Link>
-            <Link to="/contact" className="btn btn--outline btn--lg">
+            <Link to="/contact" className="btn btn--ghost btn--lg">
               Book a Table
             </Link>
           </div>
