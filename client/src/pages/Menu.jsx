@@ -7,8 +7,8 @@ export function Menu() {
     indian: [
       {
         icon: "🍛",
-        name: "Butter Chicken",
-        description: "Creamy tomato-based curry with tender chicken pieces",
+        name: "Butter Paneer",
+        description: "Creamy tomato-based curry with paneer",
         price: "₹450",
       },
       {

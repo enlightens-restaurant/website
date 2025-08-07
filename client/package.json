@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.7",
   "type": "module",
-  "homepage": "https://shanu516516.github.io/website",
+  "homepage": "https://enlightensbhopal.com",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -15,7 +15,7 @@ import "./logo-theme.css";
 
 function App() {
   return (
-    <BrowserRouter basename="/website">
+    <BrowserRouter basename="/">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -8,6 +8,6 @@ import react from "@vitejs/plugin-react";
 // });
 export default defineConfig(({ command }) => ({
   // command === "serve"  →  npm run dev
-  base: command === "serve" ? "/" : "/website/",
+  base: command === "serve" ? "/" : "/",
   plugins: [react()],
 }));

@@ -7,19 +7,19 @@
     <title>Enlightens Restaurant</title>
     <script>
         (function () {
-            var base = '/website'; // MUST match vite.config.js base (without trailing slash)
+            var base = ''; // Updated for custom domain - no base path needed
             var l = window.location;
             // If the current path is exactly the base or already starts with base + '/?p=', do nothing
-            if (l.pathname === base + '/' || l.search.startsWith('?p=')) return;
+            if (l.pathname === '/' || l.search.startsWith('?p=')) return;
 
-            // Strip the base from the path (if it exists) so we don't double it up
-            var path = l.pathname.startsWith(base) ? l.pathname.slice(base.length) : l.pathname;
+            // Get the full path for custom domain
+            var path = l.pathname;
             var query = l.search;
             var hash = l.hash;
 
             var target = path + query + hash;
             // Encode and redirect using ?p=<encoded>
-            var redirectUrl = base + '/?p=' + encodeURIComponent(target);
+            var redirectUrl = '/?p=' + encodeURIComponent(target);
             l.replace(redirectUrl);
         })();
     </script>
