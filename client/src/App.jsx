@@ -11,10 +11,11 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import "./index.css";
+import "./logo-theme.css";
 
 function App() {
   return (
-    <BrowserRouter basename="/website">
+    <BrowserRouter basename="/">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

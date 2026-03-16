@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import bodhiLogo from "../assets/logo_bodhi_resize.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -65,8 +66,11 @@ export default function Navbar() {
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`} id="navbar">
       <div className="container">
         <Link to="/" className="nav-brand" onClick={closeMenu}>
-          <h2>Enlightens</h2>
-          <span className="nav-tagline">Rooftop Restaurant</span>
+          <img className="nav-logo" src={bodhiLogo} alt="Bodhi tree logo" />
+          <div className="nav-logo-container">
+            <h2>Enlightens</h2>
+            <span className="nav-tagline">Rooftop Restaurant</span>
+          </div>
         </Link>
 
         <div className={`nav-menu ${isMenuOpen ? "active" : ""}`} id="navMenu">

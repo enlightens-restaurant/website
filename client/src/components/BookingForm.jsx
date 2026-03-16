@@ -70,51 +70,66 @@ export default function BookingForm() {
         )}
 
         <div
-          className="contact-form"
+          className="contact-form booking-form-shell"
           style={{ maxWidth: "600px", margin: "0 auto" }}
         >
           <form onSubmit={handleSubmit}>
             <div className="form-row">
               <div className="form-group">
-                <label className="form-label">Your Name *</label>
+                <label className="form-label" htmlFor="booking-name">
+                  Your Name *
+                </label>
                 <input
+                  id="booking-name"
                   type="text"
                   name="name"
                   className="form-control"
                   value={form.name}
                   onChange={handleChange}
+                  placeholder="Enter your full name"
                   required
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Phone Number *</label>
+                <label className="form-label" htmlFor="booking-phone">
+                  Phone Number *
+                </label>
                 <input
+                  id="booking-phone"
                   type="tel"
                   name="phone"
                   className="form-control"
                   value={form.phone}
                   onChange={handleChange}
+                  placeholder="Enter your phone number"
                   required
                 />
               </div>
             </div>
 
             <div className="form-group">
-              <label className="form-label">Email Address *</label>
+              <label className="form-label" htmlFor="booking-email">
+                Email Address *
+              </label>
               <input
+                id="booking-email"
                 type="email"
                 name="email"
                 className="form-control"
                 value={form.email}
                 onChange={handleChange}
+                placeholder="Enter your email address"
                 required
               />
             </div>
 
             <div className="form-row">
               <div className="form-group">
-                <label className="form-label">Preferred Date</label>
+                <label className="form-label" htmlFor="booking-date">
+                  Preferred Date
+                </label>
                 <input
+                  id="booking-date"
                   type="date"
                   name="date"
                   className="form-control"
@@ -123,13 +138,17 @@ export default function BookingForm() {
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Number of Guests</label>
+                <label className="form-label" htmlFor="booking-guests">
+                  Number of Guests
+                </label>
                 <input
+                  id="booking-guests"
                   type="number"
                   name="guests"
                   className="form-control"
                   value={form.guests}
                   onChange={handleChange}
+                  placeholder="How many guests?"
                   min="1"
                   max="200"
                 />
@@ -137,10 +156,11 @@ export default function BookingForm() {
             </div>
 
             <div className="form-group">
-              <label className="form-label">
+              <label className="form-label" htmlFor="booking-message">
                 Special Requirements or Notes
               </label>
               <textarea
+                id="booking-message"
                 name="message"
                 className="form-control"
                 value={form.message}

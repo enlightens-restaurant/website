@@ -303,7 +303,7 @@ html {
   font-family: var(--font-family-base);
   line-height: var(--line-height-normal);
   color: var(--color-text);
-  background-color: var(--color-background);
+  /* background-color: var(--color-background); */
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -474,20 +474,25 @@ pre code {
 .form-control {
   display: block;
   width: 100%;
-  padding: var(--space-8) var(--space-12);
-  font-size: var(--font-size-md);
+  min-height: 52px;
+  padding: 0 var(--space-16);
+  font-size: var(--font-size-lg);
   line-height: 1.5;
   color: var(--color-text);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-base);
+  background-color: rgba(var(--color-slate-900-rgb), 0.03);
+  border: 1.5px solid rgba(var(--color-brown-600-rgb), 0.24);
+  border-radius: var(--radius-md);
   transition: border-color var(--duration-fast) var(--ease-standard),
-    box-shadow var(--duration-fast) var(--ease-standard);
+    box-shadow var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
 }
 
 textarea.form-control {
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
+  min-height: 140px;
+  padding: var(--space-16);
+  resize: vertical;
 }
 
 select.form-control {
@@ -520,14 +525,31 @@ select.form-control {
 
 .form-control:focus {
   border-color: var(--color-primary);
-  outline: var(--focus-outline);
+  background-color: var(--color-surface);
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: rgba(var(--color-slate-500-rgb), 0.9);
+}
+
+.form-control::-webkit-date-and-time-value {
+  text-align: left;
+}
+
+.form-control::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.75;
 }
 
 .form-label {
   display: block;
   margin-bottom: var(--space-8);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  letter-spacing: 0.01em;
 }
 
 .form-group {
@@ -776,7 +798,13 @@ select.form-control {
   justify-content: space-between;
   padding: var(--space-16) var(--space-20);
 }
-
+.nav-brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-8);
+  justify-content: flex-start;
+}
 .nav-brand h2 {
   color: var(--color-gold);
   margin: 0;
@@ -791,6 +819,10 @@ select.form-control {
   display: block;
   margin-top: -4px;
   opacity: 0.8;
+}
+.nav-logo {
+  width: 3rem;
+  height: 3rem;
 }
 
 .nav-menu {
@@ -858,13 +890,19 @@ select.form-control {
 
 /* Hero Section */
 .hero {
+  position: relative;
   height: 100vh;
-  background: var(--color-bg-1);
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.1'%3E%3Cpath d='M30 0c16.569 0 30 13.431 30 30s-13.431 30-30 30S0 46.569 0 30 13.431 0 30 0zm0 6c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24S43.255 6 30 6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  text-align: center;
+  padding: 6.5rem 1rem 5rem;
+  background: radial-gradient(
+      circle at 50% -10%,
+      rgba(25, 30, 39, 0.45),
+      rgba(5, 6, 9, 0.95) 70%
+    ),
+    url("./assets/bg_twilight.jpg") center/cover no-repeat;
   overflow: hidden;
 }
 
@@ -875,11 +913,11 @@ select.form-control {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
+  /* background: linear-gradient(
     45deg,
     rgba(44, 95, 45, 0.8),
     rgba(60, 36, 21, 0.6)
-  );
+  ); */
 }
 
 .hero-content {
@@ -912,6 +950,44 @@ select.form-control {
   flex-wrap: wrap;
 }
 
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  /* background: linear-gradient(
+    45deg,
+    rgba(44, 95, 45, 0.85),
+    rgba(14, 48, 32, 0.7)
+  ); */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero .leaf-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero .leaf-layer span {
+  position: absolute;
+  width: 1.2rem;
+  height: 1.8rem;
+  transform-origin: 50% 90%;
+  animation: leafFloat linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes leafFloat {
+  from {
+    transform: translateY(-15vh) rotate(0deg) scale(1);
+  }
+  to {
+    transform: translateY(110vh) rotate(360deg) scale(1.3);
+  }
+}
+
 /* Section Styling */
 .py-16 {
   padding: 4rem 0;
@@ -931,6 +1007,7 @@ select.form-control {
   font-size: var(--font-size-4xl);
   color: var(--color-text);
   margin-bottom: var(--space-16);
+  display: inline-block;
   position: relative;
 }
 
@@ -940,7 +1017,8 @@ select.form-control {
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
+  width: 120%;
+  min-width: 60px;
   height: 3px;
   background: var(--color-gold);
 }
@@ -1057,7 +1135,8 @@ select.form-control {
 
 /* Ambiance Section */
 .ambiance {
-  background: var(--color-bg-3);
+  /* background: var(--color-bg-3); */
+  background: var(--color-surface);
 }
 
 .ambiance-grid {
@@ -1197,7 +1276,8 @@ select.form-control {
 
 /* Events Section */
 .events {
-  background: var(--color-bg-4);
+  /* background: var(--color-bg-4); */
+  background: var(--color-surface);
 }
 
 .events-grid {
@@ -1282,7 +1362,8 @@ select.form-control {
 
 /* Contact Section */
 .contact {
-  background: var(--color-bg-5);
+  /* background: var(--color-bg-5); */
+  background: var(--color-surface);
 }
 
 .contact-grid {
@@ -1295,7 +1376,14 @@ select.form-control {
   background: var(--color-surface);
   padding: var(--space-32);
   border-radius: var(--radius-lg);
+  border: 1px solid rgba(var(--color-brown-600-rgb), 0.14);
   box-shadow: var(--shadow-md);
+}
+
+.booking-form-shell {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.98)),
+    radial-gradient(circle at top, rgba(var(--color-teal-500-rgb), 0.08), transparent 45%);
 }
 
 .form-row {
@@ -1460,6 +1548,15 @@ select.form-control {
 .btn--outline:hover {
   background: var(--color-gold);
   color: var(--color-dark-brown);
+}
+
+/* Hero logo */
+.hero img.bodhi {
+  width: min(30rem, 65vw);
+  margin-bottom: 2.5rem;
+  filter: drop-shadow(0 0 14px rgba(255, 255, 200, 0.35))
+    drop-shadow(0 0 34px rgba(255, 255, 200, 0.18));
+  z-index: 2;
 }
 
 /* Responsive Design */

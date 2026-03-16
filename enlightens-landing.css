@@ -1,0 +1,183 @@
+/* ===========================================================
+   ENLIGHTENS  ─  Landing-page skin
+   -----------------------------------------------------------
+   1.  Imports earlier palette / utilities
+   2.  Sets a twilight photo-gradient as the page background
+   3.  Adds a floating-leaf animation layer
+   4.  Styles the navbar, hero & footer exactly as in mock-up
+   =========================================================== */
+
+/* 1 ─ bring in the core variables & helpers you already created */
+@import url("./theme.css"); /* adjust path as needed */
+
+/* 2 ─ full-page twilight background image */
+body {
+  /* Dark-to-darker radial gradient so the centre glows slightly
+     plus a high-res starry photo for texture                     */
+  background: radial-gradient(
+      circle at 50% -10%,
+      rgba(25, 30, 39, 0.45),
+      rgba(5, 6, 9, 0.95) 70%
+    ),
+    url("assets/bg_twilight.jpg") center / cover no-repeat fixed;
+}
+
+/* OPTIONAL: if you’d rather embed a pure CSS gradient, comment
+   out the url() and just keep the radial-gradient above.        */
+
+/* 3 ─ floating leaf confetti (uses 4 colour tokens from theme) */
+#leaf-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+/* #leaf-layer span {
+  position: absolute;
+  width: 0.7rem;
+  height: 1.1rem;
+  background: currentColor;
+  border-radius: 40% 40% 30% 30%;
+  transform-origin: center bottom;
+  opacity: 0.85;
+  animation: leafFloat linear infinite;
+} */
+#leaf-layer span {
+  position: absolute;
+  width: 1.2rem;
+  height: 1.8rem;
+  transform-origin: 50% 90%;
+  animation: leafFloat linear infinite;
+  opacity: 0.7;
+}
+
+/* generate 45 leaves via JS or server-side loop – example CSS:  */
+#leaf-layer span:nth-child(4n) {
+  color: var(--leaf-green);
+}
+#leaf-layer span:nth-child(4n + 1) {
+  color: var(--leaf-teal);
+}
+#leaf-layer span:nth-child(4n + 2) {
+  color: var(--leaf-blue);
+}
+#leaf-layer span:nth-child(4n + 3) {
+  color: var(--leaf-gold);
+}
+
+@keyframes leafFloat {
+  from {
+    transform: translateY(-15vh) rotate(0deg) scale(1);
+  }
+  to {
+    transform: translateY(110vh) rotate(360deg) scale(1.3);
+  }
+}
+
+/* 4 ─ NAVBAR, HERO, FOOTER  (identical to mock-up) -------------*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius-m);
+}
+.navbar img.logo {
+  width: 2.6rem;
+  margin-right: 0.55rem;
+  vertical-align: middle;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.nav-links a {
+  color: var(--clr-text-100);
+  text-decoration: none;
+  margin-left: 1.5rem;
+  position: relative;
+  padding-bottom: 0.25rem;
+  transition: color var(--transition);
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--leaf-teal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--leaf-teal);
+}
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Hero */
+.hero {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 6.5rem 1rem 5rem;
+}
+.hero img.bodhi {
+  width: min(22rem, 65vw);
+  margin-bottom: 2.5rem;
+  filter: drop-shadow(0 0 14px rgba(255, 255, 200, 0.35))
+    drop-shadow(0 0 34px rgba(255, 255, 200, 0.18));
+}
+.hero h1 {
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  font-weight: 700;
+  margin: 0 0 0.7rem;
+  background: linear-gradient(135deg, var(--leaf-green), var(--leaf-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p {
+  max-width: 40rem;
+  margin-inline: auto;
+  font-size: 1.125rem;
+  color: var(--clr-text-300);
+}
+.hero .cta-group {
+  margin-top: 2.2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Footer */
+footer {
+  margin-top: 6rem;
+  padding: 3rem 0 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--clr-text-300);
+  border-top: 1px solid var(--clr-border);
+}
+
+/* ---------- helpers to keep it tidy on small viewports ----------*/
+@media (max-width: 480px) {
+  .navbar {
+    padding-inline: 1rem;
+  }
+  .nav-links a {
+    margin-left: 1rem;
+  }
+}
