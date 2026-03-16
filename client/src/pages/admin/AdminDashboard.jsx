@@ -36,148 +36,49 @@ export function AdminDashboard() {
   }
 
   return (
-    <section className="contact py-16 page-section">
+    <section className="contact admin-dashboard py-16 page-section">
       <div className="container">
         <div className="section-header">
           <h2>Admin Dashboard</h2>
           <p>Manage booking requests and inquiries</p>
         </div>
 
-        <div className="booking-stats" style={{ marginBottom: "2rem" }}>
-          <div
-            className="stats-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "1rem",
-              marginBottom: "2rem",
-            }}
-          >
-            <div
-              className="stat-card"
-              style={{
-                background: "#f8f9fa",
-                padding: "1.5rem",
-                borderRadius: "8px",
-                textAlign: "center",
-              }}
-            >
-              <h3
-                style={{
-                  margin: "0 0 0.5rem 0",
-                  fontSize: "2rem",
-                  color: "#d4af37",
-                }}
-              >
-                {bookings.length}
-              </h3>
-              <p style={{ margin: 0, color: "#666" }}>Total Bookings</p>
+        <div className="booking-stats">
+          <div className="stats-grid admin-stats-grid">
+            <div className="stat-card admin-stat-card">
+              <h3 className="admin-stat-value">{bookings.length}</h3>
+              <p className="admin-stat-label">Total Bookings</p>
             </div>
-            <div
-              className="stat-card"
-              style={{
-                background: "#f8f9fa",
-                padding: "1.5rem",
-                borderRadius: "8px",
-                textAlign: "center",
-              }}
-            >
-              <h3
-                style={{
-                  margin: "0 0 0.5rem 0",
-                  fontSize: "2rem",
-                  color: "#d4af37",
-                }}
-              >
+            <div className="stat-card admin-stat-card">
+              <h3 className="admin-stat-value">
                 {bookings.filter((b) => b.inquiryType === "dinner").length}
               </h3>
-              <p style={{ margin: 0, color: "#666" }}>Dinner Reservations</p>
+              <p className="admin-stat-label">Dinner Reservations</p>
             </div>
-            <div
-              className="stat-card"
-              style={{
-                background: "#f8f9fa",
-                padding: "1.5rem",
-                borderRadius: "8px",
-                textAlign: "center",
-              }}
-            >
-              <h3
-                style={{
-                  margin: "0 0 0.5rem 0",
-                  fontSize: "2rem",
-                  color: "#d4af37",
-                }}
-              >
+            <div className="stat-card admin-stat-card">
+              <h3 className="admin-stat-value">
                 {bookings.filter((b) => b.inquiryType === "event").length}
               </h3>
-              <p style={{ margin: 0, color: "#666" }}>Event Bookings</p>
+              <p className="admin-stat-label">Event Bookings</p>
             </div>
           </div>
         </div>
 
         <div className="bookings-list">
-          <h3
-            style={{
-              marginBottom: "1.5rem",
-              borderBottom: "2px solid #d4af37",
-              paddingBottom: "0.5rem",
-            }}
-          >
-            Recent Booking Requests
-          </h3>
+          <h3 className="admin-section-title">Recent Booking Requests</h3>
 
           {bookings.length === 0 ? (
             <div className="form-success">
               <p>No booking requests yet.</p>
             </div>
           ) : (
-            <div
-              className="bookings-grid"
-              style={{ display: "grid", gap: "1.5rem" }}
-            >
+            <div className="bookings-grid admin-bookings-grid">
               {bookings.map((booking) => (
-                <div
-                  key={booking._id}
-                  className="booking-card"
-                  style={{
-                    border: "1px solid #ddd",
-                    borderRadius: "8px",
-                    padding: "1.5rem",
-                    background: "#fff",
-                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-                  }}
-                >
-                  <div
-                    className="booking-header"
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                      marginBottom: "1rem",
-                      borderBottom: "1px solid #eee",
-                      paddingBottom: "1rem",
-                    }}
-                  >
+                <div key={booking._id} className="booking-card admin-booking-card">
+                  <div className="booking-header admin-booking-header">
                     <div>
-                      <h4
-                        style={{
-                          margin: "0 0 0.5rem 0",
-                          fontSize: "1.25rem",
-                          color: "#333",
-                        }}
-                      >
-                        {booking.name}
-                      </h4>
-                      <p
-                        style={{
-                          margin: "0",
-                          color: "#666",
-                          fontSize: "0.9rem",
-                        }}
-                      >
-                        {booking.email}
-                      </p>
+                      <h4 className="admin-booking-name">{booking.name}</h4>
+                      <p className="admin-booking-email">{booking.email}</p>
                     </div>
                     {booking.inquiryType && (
                       <span
@@ -207,36 +108,24 @@ export function AdminDashboard() {
                     )}
                   </div>
 
-                  <div
-                    className="booking-details"
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      gap: "1rem",
-                      marginBottom: "1rem",
-                    }}
-                  >
+                  <div className="booking-details admin-booking-details">
                     <div>
-                      <strong style={{ color: "#d4af37" }}>📞 Phone:</strong>
-                      <p style={{ margin: "0.25rem 0 0 0" }}>{booking.phone}</p>
+                      <strong className="admin-detail-label">📞 Phone:</strong>
+                      <p className="admin-detail-value">{booking.phone}</p>
                     </div>
                     <div>
-                      <strong style={{ color: "#d4af37" }}>📅 Date:</strong>
-                      <p style={{ margin: "0.25rem 0 0 0" }}>
-                        {formatDate(booking.date)}
-                      </p>
+                      <strong className="admin-detail-label">📅 Date:</strong>
+                      <p className="admin-detail-value">{formatDate(booking.date)}</p>
                     </div>
                     <div>
-                      <strong style={{ color: "#d4af37" }}>👥 Guests:</strong>
-                      <p style={{ margin: "0.25rem 0 0 0" }}>
+                      <strong className="admin-detail-label">👥 Guests:</strong>
+                      <p className="admin-detail-value">
                         {booking.guests || "Not specified"}
                       </p>
                     </div>
                     <div>
-                      <strong style={{ color: "#d4af37" }}>
-                        🕒 Submitted:
-                      </strong>
-                      <p style={{ margin: "0.25rem 0 0 0" }}>
+                      <strong className="admin-detail-label">🕒 Submitted:</strong>
+                      <p className="admin-detail-value">
                         {formatDate(booking.createdAt)}
                       </p>
                     </div>
@@ -244,17 +133,8 @@ export function AdminDashboard() {
 
                   {booking.message && (
                     <div>
-                      <strong style={{ color: "#d4af37" }}>💬 Message:</strong>
-                      <p
-                        style={{
-                          margin: "0.5rem 0 0 0",
-                          fontStyle: "italic",
-                          background: "#f8f9fa",
-                          padding: "1rem",
-                          borderRadius: "4px",
-                          borderLeft: "4px solid #d4af37",
-                        }}
-                      >
+                      <strong className="admin-detail-label">💬 Message:</strong>
+                      <p className="admin-message-box">
                         {booking.message}
                       </p>
                     </div>
