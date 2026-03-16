@@ -49,7 +49,7 @@ export function Home() {
       <section className="hero">
         <div className="leaf-layer"></div>
         <div className="hero-content">
-          <img className="bodhi" src={bodhiLogo} alt="Bodhi tree logo" />
+          <img className="bodhi" src={bodhiLogo} alt="Enlightens logo" />
           <h1 className="hero-title">Enlightens – Where Food Meets Serenity</h1>
           <p className="hero-subtitle">
             Premium Rooftop Restaurant • Banquet Hall • Event Destination

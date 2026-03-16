@@ -66,7 +66,7 @@ export default function Navbar() {
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`} id="navbar">
       <div className="container">
         <Link to="/" className="nav-brand" onClick={closeMenu}>
-          <img className="nav-logo" src={bodhiLogo} alt="Bodhi tree logo" />
+          <img className="nav-logo" src={bodhiLogo} alt="Enlightens logo" />
           <div className="nav-logo-container">
             <h2>Enlightens</h2>
             <span className="nav-tagline">Rooftop Restaurant</span>
