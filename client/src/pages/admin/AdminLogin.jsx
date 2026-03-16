@@ -1,19 +1,35 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { setAdminToken } from "../../utils/adminAuth";
 
 export function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    if (res.ok) navigate("/admin/dashboard");
-    else alert("Login failed");
+    setError("");
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        setError("Login failed. Please check your credentials.");
+        return;
+      }
+
+      const data = await res.json();
+      setAdminToken(data.token);
+      navigate("/admin/dashboard");
+    } catch (loginError) {
+      console.error("Admin login error:", loginError);
+      setError("Unable to login right now. Please try again.");
+    }
   };
 
   return (
@@ -27,6 +43,11 @@ export function AdminLogin() {
           className="contact-form"
           style={{ maxWidth: "400px", margin: "0 auto" }}
         >
+          {error ? (
+            <div className="form-error" role="alert">
+              <p>{error}</p>
+            </div>
+          ) : null}
           <div className="form-group">
             <label className="form-label">Email</label>
             <input

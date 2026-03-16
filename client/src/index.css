@@ -1406,6 +1406,20 @@ select.form-control {
   font-weight: var(--font-weight-medium);
 }
 
+.form-error {
+  background: rgba(var(--color-error-rgb), 0.08);
+  border: 1px solid rgba(var(--color-error-rgb), 0.25);
+  color: var(--color-error);
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  margin-bottom: var(--space-16);
+  font-weight: var(--font-weight-medium);
+}
+
+.form-error p {
+  margin: 0;
+}
+
 .contact-info {
   display: flex;
   flex-direction: column;

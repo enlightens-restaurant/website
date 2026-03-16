@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Menu } from "./pages/Menu";
 import { Ambiance } from "./pages/Ambiance";
@@ -9,9 +9,14 @@ import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { getAdminToken } from "./utils/adminAuth";
 
 import "./index.css";
 import "./logo-theme.css";
+
+function ProtectedAdminRoute({ children }) {
+  return getAdminToken() ? children : <Navigate to="/admin" replace />;
+}
 
 function App() {
   return (
@@ -27,7 +32,14 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedAdminRoute>
+              <AdminDashboard />
+            </ProtectedAdminRoute>
+          }
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

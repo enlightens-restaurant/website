@@ -1,21 +1,39 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  clearAdminToken,
+  getAdminAuthHeaders,
+} from "../../utils/adminAuth";
 
 export function AdminDashboard() {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/bookings`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/bookings`, {
+      headers: {
+        ...getAdminAuthHeaders(),
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setBookings(data);
-        setLoading(false);
+        if (Array.isArray(data)) {
+          setBookings(data);
+          setLoading(false);
+          return;
+        }
+
+        throw new Error("Unauthorized");
       })
       .catch((error) => {
         console.error("Error fetching bookings:", error);
+        clearAdminToken();
+        setBookings([]);
         setLoading(false);
+        navigate("/admin");
       });
-  }, []);
+  }, [navigate]);
 
   const formatDate = (dateString) => {
     if (!dateString) return "Not specified";

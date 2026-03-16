@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Booking = require("../models/Booking");
+const { requireAdminAuth } = require("../middleware/adminAuth");
 
 // Create Booking
 router.post("/", async (req, res) => {
@@ -10,7 +11,7 @@ router.post("/", async (req, res) => {
 });
 
 // Get All Bookings (Admin)
-router.get("/", async (req, res) => {
+router.get("/", requireAdminAuth, async (req, res) => {
   const bookings = await Booking.find().sort({ createdAt: -1 });
   res.json(bookings);
 });
