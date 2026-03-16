@@ -1351,6 +1351,97 @@ select.form-control {
   overflow: hidden;
 }
 
+.media-card-button {
+  appearance: none;
+  width: 100%;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(var(--color-brown-600-rgb), 0.14);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-normal) var(--ease-standard),
+    box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.media-card-button:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.gallery-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: rgba(var(--color-slate-900-rgb), 0.08);
+}
+
+.gallery-caption {
+  padding: var(--space-16);
+}
+
+.gallery-caption h4 {
+  margin: 0 0 var(--space-6) 0;
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+}
+
+.gallery-caption p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+}
+
+.media-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(8, 8, 10, 0.88);
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.media-lightbox-figure {
+  margin: 0;
+  max-width: min(96vw, 1080px);
+  max-height: 92vh;
+}
+
+.media-lightbox-image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(92vh - 4rem);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.media-lightbox-caption {
+  margin-top: var(--space-12);
+  padding: var(--space-12) var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  color: var(--color-white);
+}
+
+.media-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-white);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
 .gallery-placeholder {
   height: 250px;
   cursor: pointer;
@@ -1358,6 +1449,124 @@ select.form-control {
 
 .gallery-cta {
   text-align: center;
+}
+
+.about-feature-image {
+  width: 100%;
+  min-height: 360px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.ambiance-gallery-shell,
+.events-media-layout {
+  margin-top: var(--space-32);
+}
+
+.section-header--compact {
+  text-align: left;
+  margin-bottom: var(--space-20);
+}
+
+.section-header--compact h2 {
+  font-size: var(--font-size-3xl);
+}
+
+.section-header--compact h2::after {
+  left: 0;
+  transform: none;
+  width: 84px;
+  min-width: 84px;
+}
+
+.section-header--compact p {
+  max-width: none;
+  margin: 0;
+}
+
+.events-media-layout {
+  display: grid;
+  gap: var(--space-32);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-24);
+}
+
+.video-card {
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(var(--color-brown-600-rgb), 0.14);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.video-card-launcher {
+  width: 100%;
+  aspect-ratio: 16 / 13.5;
+  min-height: 0;
+  border: 0;
+  display: grid;
+  place-items: center;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  position: relative;
+}
+
+.video-card-launcher::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.12),
+    rgba(0, 0, 0, 0.45)
+  );
+}
+
+.video-card-play {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-12) var(--space-20);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+}
+
+.video-card-player {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 13.5;
+  min-height: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+.video-card-embed {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-card-body {
+  padding: var(--space-20);
+}
+
+.video-card-body h3 {
+  margin: 0 0 var(--space-8) 0;
+  color: var(--color-text);
+}
+
+.video-card-body p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
 }
 
 /* Contact Section */

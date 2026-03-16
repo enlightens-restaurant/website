@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import bodhiLogo from "../assets/logo_bodhi_resize.png";
+import MediaGallery from "../components/MediaGallery";
+import { ambianceGalleryItems, foodGalleryItems } from "../data/mediaCatalog";
+
+const homeGalleryItems = [
+  ambianceGalleryItems[0],
+  ambianceGalleryItems[2],
+  ambianceGalleryItems[5],
+  foodGalleryItems[1],
+  foodGalleryItems[3],
+  foodGalleryItems[5],
+];
 
 export function Home() {
   useEffect(() => {
@@ -104,10 +115,12 @@ export function Home() {
               </div>
             </div>
             <div className="about-image">
-              <div className="image-placeholder">
-                <span>🏢</span>
-                <p>Beautiful Rooftop View</p>
-              </div>
+              <img
+                src="/media/Ambience/3.jpeg"
+                alt="Ambience view at Enlightens rooftop restaurant"
+                className="about-feature-image"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
@@ -122,46 +135,11 @@ export function Home() {
               Take a glimpse into our beautiful spaces and delicious creations
             </p>
           </div>
-          <div className="gallery-grid">
-            <div className="gallery-item">
-              <div className="gallery-placeholder">
-                <span>🍽️</span>
-                <p>Elegant Dining Setup</p>
-              </div>
-            </div>
-            <div className="gallery-item">
-              <div className="gallery-placeholder">
-                <span>🌃</span>
-                <p>Rooftop Night View</p>
-              </div>
-            </div>
-            <div className="gallery-item">
-              <div className="gallery-placeholder">
-                <span>🎂</span>
-                <p>Birthday Celebration</p>
-              </div>
-            </div>
-            <div className="gallery-item">
-              <div className="gallery-placeholder">
-                <span>🍛</span>
-                <p>Delicious Food</p>
-              </div>
-            </div>
-            <div className="gallery-item">
-              <div className="gallery-placeholder">
-                <span>💐</span>
-                <p>Wedding Decoration</p>
-              </div>
-            </div>
-            <div className="gallery-item">
-              <div className="gallery-placeholder">
-                <span>🏢</span>
-                <p>Banquet Hall</p>
-              </div>
-            </div>
-          </div>
+          <MediaGallery items={homeGalleryItems} />
           <div className="gallery-cta">
-            <button className="btn btn--outline">View Full Gallery</button>
+            <Link to="/ambiance" className="btn btn--outline">
+              View Full Gallery
+            </Link>
           </div>
         </div>
       </section>
